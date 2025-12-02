@@ -1,5 +1,4 @@
 import { Button } from '@/app/components/button'
-import { SectionTitle } from '@/app/components/section-title'
 import { TechBadge } from '@/app/components/tech-badge'
 import { TbBrandGithub } from 'react-icons/tb'
 import { FiGlobe } from 'react-icons/fi'
@@ -7,6 +6,7 @@ import { Link } from '@/app/components/link'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 import { Project } from '@/app/types/projects'
 import { RichText } from '@/app/components/rich-text'
+import Image from 'next/image'
 
 type ProjectDetailsProps = {
   project: Project
@@ -14,54 +14,61 @@ type ProjectDetailsProps = {
 
 export const ProjectDetails = ({ project }: ProjectDetailsProps) => {
   return (
-    <div className="w-full sm:min-h-[750px] flex flex-col items-center justify-end relative pb-10 sm:pb-24 py-24 px-6 overflow-hidden">
-      <div
-        className="absolute inset-0 z-[-1] bg-red-100"
-        style={{
-          background: `url(/images/hero-bg.png) no-repeat center/cover, url(${project.pageThumbnail.url}) no-repeat center/cover`,
-        }}
-      />
+    <section className="container py-12 md:py-20">
+      <div className="max-w-[640px] mb-12">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-2 text-zinc-300 hover:text-zinc-100 transition-colors mb-8"
+        >
+          <HiArrowNarrowLeft size={20} />
+          Back to projects
+        </Link>
 
-      <SectionTitle
-        subtitle="projects"
-        title={project.title}
-        className="text-center items-center sm:[&>h3]:text-4xl"
-      />
+        <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
+          {project.title}
+        </h1>
 
-      <div className="text-gray-400 text-center max-w-[640px] my-4 sm:my-6 text-sm sm:text-base">
-        <RichText content={project.description.raw} />
+        <p className="text-zinc-400 mb-8 leading-relaxed">
+          <RichText content={project.description.raw} />
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.techs.map((tech) => (
+            <TechBadge key={tech.name} name={tech.name} />
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3 flex-col sm:flex-row">
+          {project?.githubUrl && (
+            <a href={project.githubUrl} target="_blank">
+              <Button className="inline-flex items-center justify-center gap-2">
+                <TbBrandGithub size={20} />
+                Repository
+              </Button>
+            </a>
+          )}
+
+          {project?.liveProjectUrl && (
+            <a href={project.liveProjectUrl} target="_blank">
+              <Button className="inline-flex items-center justify-center gap-2">
+                <FiGlobe size={20} />
+                Project
+              </Button>
+            </a>
+          )}
+        </div>
       </div>
 
-      <div className="w-full max-w-[330px] flex flex-wrap items-center justify-center gap-2">
-        {project.techs.map((tech) => (
-          <TechBadge key={tech.name} name={tech.name} />
-        ))}
+      <div className="w-full">
+        <Image
+          width={1080}
+          height={672}
+          className="w-full aspect-auto object-cover rounded-lg shadow-2xl"
+          src={project.pageThumbnail.url}
+          alt={`Thumbnail of project ${project.title}`}
+          unoptimized
+        />
       </div>
-
-      <div className="my-6 sm:my-12 flex items-center gap-2 sm:gap-4 flex-col sm:flex-row">
-        {project?.githubUrl && (
-          <a href={project.githubUrl} target="_blank">
-            <Button className="min-w-[180px]">
-              <TbBrandGithub size={20} />
-              Repository
-            </Button>
-          </a>
-        )}
-
-        {project?.liveProjectUrl && (
-          <a href={project.liveProjectUrl} target="_blank">
-            <Button className="min-w-[180px]">
-              <FiGlobe size={20} />
-              Project
-            </Button>
-          </a>
-        )}
-      </div>
-
-      <Link href="/projects">
-        <HiArrowNarrowLeft size={20} />
-        Back to projects
-      </Link>
-    </div>
+    </section>
   )
 }

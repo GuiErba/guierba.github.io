@@ -35,14 +35,14 @@ function BlogFilters({
     <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
       <div className="relative w-full md:w-auto mt-2 min-w-[200px]">
         <select
-          className="w-full h-14 bg-gray-800 rounded-lg text-gray-50 px-4 focus:outline-none focus:ring-2 ring-cyan-600 border-none appearance-none pr-10"
+          className="w-full h-14 bg-zinc-800 rounded-lg text-zinc-50 px-4 focus:outline-none focus:ring-2 ring-cyan-600 border border-zinc-700 appearance-none pr-10"
           value={orderBy}
           onChange={(e) => setOrderBy(e.target.value)}
         >
           <option value="createdAt_DESC">Latest</option>
           <option value="createdAt_ASC">Older</option>
         </select>
-        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400">
           <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
             <path
               stroke="currentColor"
@@ -56,7 +56,7 @@ function BlogFilters({
       </div>
       <input
         type="text"
-        className="w-full h-14 bg-gray-800 rounded-lg placeholder:text-gray-400 text-gray-50 px-4 focus:outline-none focus:ring-2 ring-cyan-600 border-none mt-2"
+        className="w-full h-14 bg-zinc-800 rounded-lg placeholder:text-zinc-400 text-zinc-50 px-4 focus:outline-none focus:ring-2 ring-cyan-600 border border-zinc-700 mt-2"
         placeholder="Search posts..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -79,7 +79,7 @@ function BlogPostsBrowser() {
   )
 
   return (
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="container mb-12">
       <BlogFilters
         orderBy={orderBy}
         setOrderBy={setOrderBy}
@@ -93,7 +93,7 @@ function BlogPostsBrowser() {
           Error searching posts.
         </div>
       ) : data && data.posts.length === 0 ? (
-        <div className="text-center text-gray-400 py-8">No posts found.</div>
+        <div className="text-center text-zinc-400 py-8">No posts found.</div>
       ) : (
         <BlogPostsList posts={data?.posts || []} />
       )}

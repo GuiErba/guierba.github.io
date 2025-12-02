@@ -4,18 +4,21 @@ import { HiArrowNarrowLeft } from 'react-icons/hi'
 
 export const BlogPageIntroduction = () => {
   return (
-    <section className="w-full h-[300px] lg:h-[400px] bg-hero-image bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center px-2">
-      <SectionTitle
-        subtitle="blog"
-        title="Blog"
-        className="flex items-center [&>h3]:text-4xl"
-      />
-      <div className="flex flex-col items-center">
-        <p className="text-gray-400 text-center max-w-[640px] my-6 text-sm sm:text-base">
+    <section className="container py-8 md:py-16">
+      <div className="max-w-[640px]">
+        <SectionTitle
+          subtitle="blog"
+          title="Latest Posts"
+          className="items-start"
+        />
+        <p className="text-zinc-400 mt-6 mb-6">
           Here you will find articles, news and content about technology,
           programming and my learnings.
         </p>
-        <Link href="/">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-zinc-300 hover:text-zinc-100 transition-colors"
+        >
           <HiArrowNarrowLeft size={20} />
           Back to home
         </Link>

@@ -7,29 +7,32 @@ type BlogPostCardProps = {
 
 export const BlogPostCard = ({ post }: BlogPostCardProps) => {
   return (
-    <div className="rounded-lg h-[436px] flex flex-col bg-gray-800 overflow-hidden border border-gray-700 hover:border-cyan-500 opacity-70 hover:opacity-100 transition-all group">
-      <div className="w-full h-48 overflow-hidden ">
-        {post.featuredImage?.url && (
-          <Image
-            width={380}
-            height={200}
-            className="w-full h-full object-cover group-hover:scale-110 duration-500 transition-all"
-            src={post.featuredImage.url}
-            alt={`Imagem de destaque do post ${post.title}`}
-            unoptimized
-          />
-        )}
-      </div>
-      <div className="flex-1 flex flex-col p-8">
-        <strong className="font-medium text-gray-50/90 group-hover:text-cyan-500 transition-all">
-          {post.title}
-        </strong>
-        <p className="mt-2 text-gray-400 text-sm line-clamp-4">
-          {post.excerpt}
-        </p>
-        <span className="text-gray-300 text-sm font-medium block mt-auto truncate">
-          {new Date(post.createdAt).toLocaleDateString('pt-BR')}
-        </span>
+    <div className="group h-full p-6 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors">
+      <div className="flex flex-col gap-4">
+        <div className="w-full h-40 overflow-hidden">
+          {post.featuredImage?.url && (
+            <Image
+              width={400}
+              height={160}
+              className="w-full h-full object-cover rounded-lg border border-zinc-800 group-hover:border-zinc-700 transition-colors"
+              src={post.featuredImage.url}
+              alt={`Featured image of post ${post.title}`}
+              unoptimized
+            />
+          )}
+        </div>
+
+        <div className="flex-1">
+          <h3 className="text-xl font-medium text-zinc-100 group-hover:text-zinc-300 transition-colors mb-2">
+            {post.title}
+          </h3>
+
+          <p className="text-zinc-400 mb-6 line-clamp-2">{post.excerpt}</p>
+
+          <span className="text-zinc-300 text-sm font-medium block">
+            {new Date(post.createdAt).toLocaleDateString('pt-BR')}
+          </span>
+        </div>
       </div>
     </div>
   )

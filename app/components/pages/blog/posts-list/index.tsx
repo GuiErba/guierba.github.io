@@ -8,12 +8,18 @@ type BlogPostsListProps = {
 
 export const BlogPostsList = ({ posts }: BlogPostsListProps) => {
   return (
-    <section className="container py-16 grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-4 gap-y-6">
-      {posts.map((post) => (
-        <Link key={post.slug} href={`/blog/${post.slug}`}>
-          <BlogPostCard post={post} />
-        </Link>
-      ))}
+    <section className="container pb-32">
+      <div className="grid grid-cols-1 gap-6">
+        {posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="block h-full"
+          >
+            <BlogPostCard post={post} />
+          </Link>
+        ))}
+      </div>
     </section>
   )
 }

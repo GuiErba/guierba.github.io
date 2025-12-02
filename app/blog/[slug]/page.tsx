@@ -2,6 +2,8 @@ import { fetchPostBySlug } from '@/app/utils/fetch-post-by-slug'
 import { notFound } from 'next/navigation'
 import { RichText } from '@/app/components/rich-text'
 import Image from 'next/image'
+import { Link } from '@/app/components/link'
+import { HiArrowNarrowLeft } from 'react-icons/hi'
 
 interface PostPageProps {
   params: { slug: string }
@@ -19,6 +21,13 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
+      <Link
+        href="/blog"
+        className="inline-flex items-center gap-2 text-zinc-300 hover:text-zinc-100 transition-colors mb-8"
+      >
+        <HiArrowNarrowLeft size={20} />
+        Back to blog
+      </Link>
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <span className="text-gray-400 text-sm block mb-6">
         {new Date(post.createdAt).toLocaleDateString('pt-BR')}
