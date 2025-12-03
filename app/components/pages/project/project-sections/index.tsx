@@ -9,10 +9,7 @@ export const ProjectSections = ({ sections }: ProjectSectionsProps) => {
   return (
     <section className="container py-12 md:py-20 flex flex-col gap-16 md:gap-24">
       {sections.map((section) => (
-        <div
-          key={section.title}
-          className="flex flex-col gap-8 md:gap-12"
-        >
+        <div key={section.title} className="flex flex-col gap-8 md:gap-12">
           <h2 className="text-2xl md:text-3xl font-semibold text-zinc-100">
             {section.title}
           </h2>
