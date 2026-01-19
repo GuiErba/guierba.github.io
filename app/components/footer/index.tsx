@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 export const Footer = () => {
   return (
     <footer className="container py-10 text-center border-t border-zinc-800">

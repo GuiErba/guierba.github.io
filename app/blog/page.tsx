@@ -2,7 +2,7 @@
 
 import { BlogPageIntroduction } from '../components/pages/blog/page-introduction'
 import { BlogPostsList } from '../components/pages/blog/posts-list'
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import useSWR from 'swr'
 import { Post } from '../types/posts'
 

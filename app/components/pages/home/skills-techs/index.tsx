@@ -12,9 +12,7 @@ export const SkillsTechs = ({ skills }: SkillsTechsProps) => {
       <SectionTitle subtitle="knowledge" title="skills & expertise" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
-        {skills?.map((skill) => (
-          <SkillTech key={skill.name} tech={skill} />
-        ))}
+        {skills?.map((skill) => <SkillTech key={skill.name} tech={skill} />)}
       </div>
     </section>
   )

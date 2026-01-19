@@ -6,8 +6,6 @@ type ProjectCardProps = {
 }
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
-  const technologies = project.techs.map((tech) => tech.name).join(', ')
-
   return (
     <div className="group h-full p-6 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors">
       <div className="flex flex-col gap-4">

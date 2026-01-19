@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { NavItem } from './nav-item'
 
 const NAV_ITEMS = [

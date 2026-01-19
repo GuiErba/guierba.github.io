@@ -2,7 +2,6 @@
 
 import { HiArrowNarrowRight } from 'react-icons/hi'
 import { Button } from '../button'
-import { SectionTitle } from '../section-title'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
