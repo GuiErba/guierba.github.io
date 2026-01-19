@@ -5,7 +5,7 @@ import { ProjectsPageData } from '../types/page-info'
 import { fetchHygraphQuery } from '../utils/fetch-hygraph-query'
 
 export const metadata = {
-  title: 'Projects | Guilherme Henrique',
+  title: 'Projects | Guilherme Erba',
 }
 
 const getPageData = async (): Promise<ProjectsPageData> => {

@@ -26,10 +26,10 @@ export const HeroSection = ({ homeInfo }: HomeSectionProps) => {
             width={128}
             height={128}
             src={homeInfo.profilePicture.url}
-            alt="Foto Guilherme Henrique"
+            alt="Picture of Guilherme Erba"
             className="w-32 h-32 rounded-full object-cover mb-6"
           />
-          <h1 className="text-4xl font-bold mb-4">Guilherme Henrique</h1>
+          <h1 className="text-4xl font-bold mb-4">Guilherme Erba</h1>
           <div className="text-zinc-400 max-w-2xl mb-8">
             <RichText content={homeInfo.introduction.raw} />
           </div>

@@ -7,15 +7,15 @@ import { HomePageData } from './types/page-info'
 import Head from 'next/head'
 
 export const metadata = {
-  title: 'Guilherme Henrique',
+  title: 'Guilherme Erba',
   description:
-    "I'm Guilherme Henrique, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence.",
+    "I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence.",
   openGraph: {
-    title: 'Guilherme Henrique | Front end Developer',
+    title: 'Guilherme Erba | Front end Developer',
     description:
-      "I'm Guilherme Henrique, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence.",
+      "I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence.",
     url: 'https://guihenrique.vercel.app/',
-    siteName: 'Guilherme Henrique',
+    siteName: 'Guilherme Erba',
     type: 'website',
     images: [
       {
@@ -25,10 +25,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Guilherme Henrique | Front end Developer',
+    title: 'Guilherme Erba | Front end Developer',
     url: 'https://guihenrique.vercel.app/',
     description:
-      "I'm Guilherme Henrique, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence.",
+      "I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence.",
     images: [
       'https://raw.githubusercontent.com/GuiiHenriq/guiihenriq.github.io/main/public/ogimage.png',
     ],
@@ -98,10 +98,10 @@ export default async function Home() {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <meta name="title" content="Guilherme Henrique | Front end Developer" />
+        <meta name="title" content="Guilherme Erba | Front end Developer" />
         <meta
           name="description"
-          content="I'm Guilherme Henrique, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
+          content="I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
         />
 
         {/* Open Graph / Facebook */}
@@ -109,11 +109,11 @@ export default async function Home() {
         <meta property="og:url" content="https://guihenrique.vercel.app/" />
         <meta
           property="og:title"
-          content="Guilherme Henrique | Front end Developer"
+          content="Guilherme Erba | Front end Developer"
         />
         <meta
           property="og:description"
-          content="I'm Guilherme Henrique, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
+          content="I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
         />
         <meta property="og:image" content="/ogimage.png" />
 
@@ -125,11 +125,11 @@ export default async function Home() {
         />
         <meta
           property="twitter:title"
-          content="Guilherme Henrique | Front end Developer"
+          content="Guilherme Erba | Front end Developer"
         />
         <meta
           property="twitter:description"
-          content="I'm Guilherme Henrique, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
+          content="I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
         />
         <meta property="twitter:image" content="/ogimage.png" />
       </Head>
