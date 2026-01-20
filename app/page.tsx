@@ -4,7 +4,6 @@ import { HighlightedProjects } from './components/pages/home/highlighted-project
 import { WorkExperience } from './components/pages/home/work-experience'
 import { fetchHygraphQuery } from './utils/fetch-hygraph-query'
 import { HomePageData } from './types/page-info'
-import Head from 'next/head'
 
 export const metadata = {
   title: 'Guilherme Erba',
@@ -35,7 +34,7 @@ export const metadata = {
   },
 }
 
-const getPageData = async (): Promise<HomePageData> => {
+const getPageData = async (): Promise<HomePageData | null> => {
   const query = `
     query PageInfoQuery {
       page(where: {slug: "home"}) {
@@ -88,56 +87,38 @@ const getPageData = async (): Promise<HomePageData> => {
     }
   `
 
-  return fetchHygraphQuery(query, 300)
+  try {
+    return await fetchHygraphQuery(query, 300)
+  } catch (error) {
+    console.error('Error fetching home page data:', error)
+    return null
+  }
 }
 
 export default async function Home() {
-  const { page: pageData, workExperiences } = await getPageData()
+  const data = await getPageData()
+  const pageData = data?.page
+  const workExperiences = data?.workExperiences || []
+
+  if (!pageData) {
+    return (
+      <div className="container flex flex-col items-center justify-center py-20">
+        <h1 className="text-4xl font-bold text-zinc-100">Loading...</h1>
+        <p className="mt-4 text-zinc-400">
+          Unable to load page data. Please try again later.
+        </p>
+      </div>
+    )
+  }
 
   return (
     <>
-      <Head>
-        {/* Primary Meta Tags */}
-        <meta name="title" content="Guilherme Erba | Front end Developer" />
-        <meta
-          name="description"
-          content="I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
-        />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://guihenrique.vercel.app/" />
-        <meta
-          property="og:title"
-          content="Guilherme Erba | Front end Developer"
-        />
-        <meta
-          property="og:description"
-          content="I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
-        />
-        <meta property="og:image" content="/ogimage.png" />
-
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://guihenrique.vercel.app/"
-        />
-        <meta
-          property="twitter:title"
-          content="Guilherme Erba | Front end Developer"
-        />
-        <meta
-          property="twitter:description"
-          content="I'm Guilherme Erba, a passionate software developer with more than 6 years of experience, immersed in the exciting universe of web creation, with a strong background in developing and implementing innovative solutions. My journey in this fascinating field has been marked by stimulating challenges and the relentless pursuit of technical excellence."
-        />
-        <meta property="twitter:image" content="/ogimage.png" />
-      </Head>
-
       <HeroSection homeInfo={pageData} />
-      <SkillsTechs skills={pageData.skillsTechs} />
+      <SkillsTechs skills={pageData.skillsTechs || []} />
       <WorkExperience experiences={workExperiences} />
-      <HighlightedProjects projects={pageData.highlightProjects.slice(0, 2)} />
+      <HighlightedProjects
+        projects={pageData.highlightProjects?.slice(0, 2) || []}
+      />
     </>
   )
 }

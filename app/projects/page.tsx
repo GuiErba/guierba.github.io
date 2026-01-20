@@ -25,11 +25,17 @@ const getPageData = async (): Promise<ProjectsPageData> => {
     }
     `
 
-  return fetchHygraphQuery(query, 300)
+  try {
+    return await fetchHygraphQuery(query, 300)
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+    return { projects: [] }
+  }
 }
 
 export default async function Projects() {
-  const { projects } = await getPageData()
+  const data = await getPageData()
+  const projects = data?.projects || []
 
   return (
     <>

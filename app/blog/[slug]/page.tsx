@@ -6,17 +6,19 @@ import { Link } from '@/app/components/link'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 
 interface PostPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: PostPageProps) {
-  const post = await fetchPostBySlug(params.slug)
+  const { slug } = await params
+  const post = await fetchPostBySlug(slug)
   if (!post) return { title: 'Post não encontrado' }
   return { title: post.title }
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const post = await fetchPostBySlug(params.slug)
+  const { slug } = await params
+  const post = await fetchPostBySlug(slug)
   if (!post) return notFound()
 
   return (
