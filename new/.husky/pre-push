@@ -1,0 +1,15 @@
+echo "🔍 Running Biome check before push..."
+echo ""
+
+npx @biomejs/biome check .
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Biome found issues! Fix them before pushing."
+  echo "   Run: npm run check"
+  echo ""
+  exit 1
+fi
+
+echo ""
+echo "✅ Biome check passed! Push allowed."

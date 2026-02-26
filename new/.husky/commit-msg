@@ -1,0 +1,27 @@
+commit_msg=$(cat "$1")
+
+pattern="^(feat|fix|refactor|docs|style|test|chore|perf|ci|build|revert)(\(.+\))?: .+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo ""
+  echo "❌ Invalid commit message!"
+  echo ""
+  echo "The message must follow the pattern:"
+  echo "  feat: feature description"
+  echo "  fix: fix description"
+  echo "  refactor: refactor description"
+  echo "  docs: description"
+  echo "  style: description"
+  echo "  test: description"
+  echo "  chore: description"
+  echo "  perf: description"
+  echo "  ci: description"
+  echo "  build: description"
+  echo "  revert: description"
+  echo ""
+  echo "Example: feat: add login page"
+  echo ""
+  echo "Your message: \"$commit_msg\""
+  echo ""
+  exit 1
+fi

@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "skills": {
+    "accessibility": {
+      "name": "accessibility",
+      "source": "local",
+      "contentHash": "706129400c8c91a9264582940b36007116faffcaf27bb0780bdab87337b4f881",
+      "installedAt": "2026-02-26T22:39:37.560Z",
+      "updatedAt": "2026-02-26T22:39:37.572Z",
+      "agents": [
+        "windsurf"
+      ],
+      "method": "copy",
+      "global": false
+    },
+    "best-practices": {
+      "name": "best-practices",
+      "source": "local",
+      "contentHash": "2abba650ba22a819e67f8c2fb09d0f5f33a24d66d945ee2ef824751bc97151ce",
+      "installedAt": "2026-02-26T22:47:58.114Z",
+      "updatedAt": "2026-02-26T22:49:58.360Z",
+      "agents": [
+        "windsurf"
+      ],
+      "method": "copy",
+      "global": false
+    },
+    "coding-guidelines": {
+      "name": "coding-guidelines",
+      "source": "local",
+      "contentHash": "28a414c715d3c41aae28a25e2f109813ec3f246f76b5567c1e7d6a128cd289ff",
+      "installedAt": "2026-02-26T22:49:24.488Z",
+      "updatedAt": "2026-02-26T22:49:24.499Z",
+      "agents": [
+        "windsurf"
+      ],
+      "method": "copy",
+      "global": false
+    },
+    "component-common-domain-detection": {
+      "name": "component-common-domain-detection",
+      "source": "local",
+      "contentHash": "58c72d63eaf387cf11ae36b223ff80478ba861f53265e42a3c4fbcb3bc739208",
+      "installedAt": "2026-02-26T22:49:41.659Z",
+      "updatedAt": "2026-02-26T22:49:41.666Z",
+      "agents": [
+        "windsurf"
+      ],
+      "method": "copy",
+      "global": false
+    },
+    "core-web-vitals": {
+      "name": "core-web-vitals",
+      "source": "local",
+      "contentHash": "3a67190e1dea1f2573d4fbb17071bbdac5ff4fd087d8cb5271094851c2acd559",
+      "installedAt": "2026-02-26T22:49:47.398Z",
+      "updatedAt": "2026-02-26T22:49:47.409Z",
+      "agents": [
+        "windsurf"
+      ],
+      "method": "copy",
+      "global": false
+    }
+  }
+}
