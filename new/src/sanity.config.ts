@@ -10,25 +10,25 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '';
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || '';
 
 export default defineConfig({
-    name: 'default',
-    title: 'My Project',
+  name: 'default',
+  title: 'My Project',
 
-    projectId,
-    dataset,
+  projectId,
+  dataset,
 
-    plugins: [
-        structureTool(),
-        visionTool(),
-        presentationTool({
-            previewUrl: {
-                previewMode: {
-                    enable: '/api/draft-mode/enable',
-                },
-            },
-        }),
-    ],
+  plugins: [
+    structureTool(),
+    visionTool(),
+    presentationTool({
+      previewUrl: {
+        previewMode: {
+          enable: '/api/draft-mode/enable',
+        },
+      },
+    }),
+  ],
 
-    schema: {
-        types: schemaTypes,
-    },
+  schema: {
+    types: schemaTypes,
+  },
 });
