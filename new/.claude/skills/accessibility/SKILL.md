@@ -48,7 +48,11 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 
 <!-- ✅ Complex image with longer description -->
 <figure>
-  <img src="infographic.png" alt="2024 market trends infographic" aria-describedby="infographic-desc" />
+  <img
+    src="infographic.png"
+    alt="2024 market trends infographic"
+    aria-describedby="infographic-desc"
+  />
   <figcaption id="infographic-desc">
     <!-- Detailed description -->
   </figcaption>
@@ -146,8 +150,19 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 <!-- Video with captions -->
 <video controls>
   <source src="video.mp4" type="video/mp4" />
-  <track kind="captions" src="captions.vtt" srclang="en" label="English" default />
-  <track kind="descriptions" src="descriptions.vtt" srclang="en" label="Descriptions" />
+  <track
+    kind="captions"
+    src="captions.vtt"
+    srclang="en"
+    label="English"
+    default
+  />
+  <track
+    kind="descriptions"
+    src="descriptions.vtt"
+    srclang="en"
+    label="Descriptions"
+  />
 </video>
 
 <!-- Audio with transcript -->
@@ -170,16 +185,16 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 
 ```javascript
 // ❌ Only handles click
-element.addEventListener('click', handleAction)
+element.addEventListener('click', handleAction);
 
 // ✅ Handles both click and keyboard
-element.addEventListener('click', handleAction)
+element.addEventListener('click', handleAction);
 element.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault()
-    handleAction()
+    e.preventDefault();
+    handleAction();
   }
-})
+});
 ```
 
 **No keyboard traps:**
@@ -189,27 +204,27 @@ element.addEventListener('keydown', (e) => {
 function openModal(modal) {
   const focusableElements = modal.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-  )
-  const firstElement = focusableElements[0]
-  const lastElement = focusableElements[focusableElements.length - 1]
+  );
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
 
   // Trap focus within modal
   modal.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
       if (e.shiftKey && document.activeElement === firstElement) {
-        e.preventDefault()
-        lastElement.focus()
+        e.preventDefault();
+        lastElement.focus();
       } else if (!e.shiftKey && document.activeElement === lastElement) {
-        e.preventDefault()
-        firstElement.focus()
+        e.preventDefault();
+        firstElement.focus();
       }
     }
     if (e.key === 'Escape') {
-      closeModal()
+      closeModal();
     }
-  })
+  });
 
-  firstElement.focus()
+  firstElement.focus();
 }
 ```
 
@@ -278,7 +293,7 @@ function showSessionWarning() {
       { label: 'Log out', action: logout },
     ],
     timeout: 120000, // 2 minutes to respond
-  })
+  });
 }
 ```
 
@@ -357,8 +372,15 @@ function showSessionWarning() {
 <form novalidate>
   <div class="field" aria-live="polite">
     <label for="email">Email</label>
-    <input type="email" id="email" aria-invalid="true" aria-describedby="email-error" />
-    <p id="email-error" class="error" role="alert">Please enter a valid email address (e.g., name@example.com)</p>
+    <input
+      type="email"
+      id="email"
+      aria-invalid="true"
+      aria-describedby="email-error"
+    />
+    <p id="email-error" class="error" role="alert">
+      Please enter a valid email address (e.g., name@example.com)
+    </p>
   </div>
 </form>
 ```
@@ -366,17 +388,17 @@ function showSessionWarning() {
 ```javascript
 // Focus first error on submit
 form.addEventListener('submit', (e) => {
-  const firstError = form.querySelector('[aria-invalid="true"]')
+  const firstError = form.querySelector('[aria-invalid="true"]');
   if (firstError) {
-    e.preventDefault()
-    firstError.focus()
+    e.preventDefault();
+    firstError.focus();
 
     // Announce error summary
-    const errorSummary = document.getElementById('error-summary')
-    errorSummary.textContent = `${errors.length} errors found. Please fix them and try again.`
-    errorSummary.focus()
+    const errorSummary = document.getElementById('error-summary');
+    errorSummary.textContent = `${errors.length} errors found. Please fix them and try again.`;
+    errorSummary.focus();
   }
-})
+});
 ```
 
 ---
@@ -424,8 +446,18 @@ form.addEventListener('submit', (e) => {
 ```html
 <!-- Custom tabs component -->
 <div role="tablist" aria-label="Product information">
-  <button role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1">Description</button>
-  <button role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1">Reviews</button>
+  <button role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1">
+    Description
+  </button>
+  <button
+    role="tab"
+    id="tab-2"
+    aria-selected="false"
+    aria-controls="panel-2"
+    tabindex="-1"
+  >
+    Reviews
+  </button>
 </div>
 <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
   <!-- Panel content -->
@@ -452,11 +484,11 @@ form.addEventListener('submit', (e) => {
 ```javascript
 // Announce dynamic content changes
 function showNotification(message, type = 'polite') {
-  const container = document.getElementById(`${type}-announcer`)
-  container.textContent = '' // Clear first
+  const container = document.getElementById(`${type}-announcer`);
+  container.textContent = ''; // Clear first
   requestAnimationFrame(() => {
-    container.textContent = message
-  })
+    container.textContent = message;
+  });
 }
 ```
 

@@ -50,7 +50,12 @@ Fix: CDN, caching, optimized backend, edge rendering
 <style>
   /* Critical above-fold CSS */
 </style>
-<link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<link
+  rel="preload"
+  href="/styles.css"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 ```
 
 **3. Slow resource load times**
@@ -71,14 +76,14 @@ Fix: CDN, caching, optimized backend, edge rendering
 useEffect(() => {
   fetch('/api/hero-text')
     .then((r) => r.json())
-    .then(setHeroText)
-}, [])
+    .then(setHeroText);
+}, []);
 
 // ✅ Server-side or static rendering
 // Use SSR, SSG, or streaming to send HTML with content
 export async function getServerSideProps() {
-  const heroText = await fetchHeroText()
-  return { props: { heroText } }
+  const heroText = await fetchHeroText();
+  return { props: { heroText } };
 }
 ```
 
@@ -99,11 +104,11 @@ export async function getServerSideProps() {
 ```javascript
 // Find your LCP element
 new PerformanceObserver((list) => {
-  const entries = list.getEntries()
-  const lastEntry = entries[entries.length - 1]
-  console.log('LCP element:', lastEntry.element)
-  console.log('LCP time:', lastEntry.startTime)
-}).observe({ type: 'largest-contentful-paint', buffered: true })
+  const entries = list.getEntries();
+  const lastEntry = entries[entries.length - 1];
+  console.log('LCP element:', lastEntry.element);
+  console.log('LCP time:', lastEntry.startTime);
+}).observe({ type: 'largest-contentful-paint', buffered: true });
 ```
 
 ---
@@ -129,18 +134,18 @@ Total INP = **Input Delay** + **Processing Time** + **Presentation Delay**
 ```javascript
 // ❌ Long synchronous task
 function processLargeArray(items) {
-  items.forEach((item) => expensiveOperation(item))
+  items.forEach((item) => expensiveOperation(item));
 }
 
 // ✅ Break into chunks with yielding
 async function processLargeArray(items) {
-  const CHUNK_SIZE = 100
+  const CHUNK_SIZE = 100;
   for (let i = 0; i < items.length; i += CHUNK_SIZE) {
-    const chunk = items.slice(i, i + CHUNK_SIZE)
-    chunk.forEach((item) => expensiveOperation(item))
+    const chunk = items.slice(i, i + CHUNK_SIZE);
+    chunk.forEach((item) => expensiveOperation(item));
 
     // Yield to main thread
-    await new Promise((r) => setTimeout(r, 0))
+    await new Promise((r) => setTimeout(r, 0));
     // Or use scheduler.yield() when available
   }
 }
@@ -152,40 +157,40 @@ async function processLargeArray(items) {
 // ❌ All work in handler
 button.addEventListener('click', () => {
   // Heavy computation
-  const result = calculateComplexThing()
+  const result = calculateComplexThing();
   // DOM updates
-  updateUI(result)
+  updateUI(result);
   // Analytics
-  trackEvent('click')
-})
+  trackEvent('click');
+});
 
 // ✅ Prioritize visual feedback
 button.addEventListener('click', () => {
   // Immediate visual feedback
-  button.classList.add('loading')
+  button.classList.add('loading');
 
   // Defer non-critical work
   requestAnimationFrame(() => {
-    const result = calculateComplexThing()
-    updateUI(result)
-  })
+    const result = calculateComplexThing();
+    updateUI(result);
+  });
 
   // Use requestIdleCallback for analytics
-  requestIdleCallback(() => trackEvent('click'))
-})
+  requestIdleCallback(() => trackEvent('click'));
+});
 ```
 
 **3. Third-party scripts**
 
 ```javascript
 // ❌ Eagerly loaded, blocks interactions
-;<script src="https://heavy-widget.com/widget.js"></script>
+<script src="https://heavy-widget.com/widget.js"></script>;
 
 // ✅ Lazy loaded on interaction or visibility
 const loadWidget = () => {
-  import('https://heavy-widget.com/widget.js').then((widget) => widget.init())
-}
-button.addEventListener('click', loadWidget, { once: true })
+  import('https://heavy-widget.com/widget.js').then((widget) => widget.init());
+};
+button.addEventListener('click', loadWidget, { once: true });
 ```
 
 **4. Excessive re-renders (React/Vue)**
@@ -193,26 +198,26 @@ button.addEventListener('click', loadWidget, { once: true })
 ```javascript
 // ❌ Re-renders entire tree
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   return (
     <div>
       <Counter count={count} />
       <ExpensiveComponent /> {/* Re-renders on every count change */}
     </div>
-  )
+  );
 }
 
 // ✅ Memoized expensive components
-const MemoizedExpensive = React.memo(ExpensiveComponent)
+const MemoizedExpensive = React.memo(ExpensiveComponent);
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   return (
     <div>
       <Counter count={count} />
       <MemoizedExpensive />
     </div>
-  )
+  );
 }
 ```
 
@@ -241,10 +246,10 @@ new PerformanceObserver((list) => {
         processingStart: entry.processingStart,
         processingEnd: entry.processingEnd,
         target: entry.target,
-      })
+      });
     }
   }
-}).observe({ type: 'event', buffered: true, durationThreshold: 16 })
+}).observe({ type: 'event', buffered: true, durationThreshold: 16 });
 ```
 
 ---
@@ -283,7 +288,10 @@ CLS measures unexpected layout shifts. A shift occurs when a visible element cha
 
 <!-- ✅ Or use aspect-ratio container -->
 <div style="aspect-ratio: 16/9;">
-  <iframe src="https://youtube.com/embed/..." style="width: 100%; height: 100%;"></iframe>
+  <iframe
+    src="https://youtube.com/embed/..."
+    style="width: 100%; height: 100%;"
+  ></iframe>
 </div>
 ```
 
@@ -291,19 +299,19 @@ CLS measures unexpected layout shifts. A shift occurs when a visible element cha
 
 ```javascript
 // ❌ Inserts content above viewport
-notifications.prepend(newNotification)
+notifications.prepend(newNotification);
 
 // ✅ Insert below viewport or use transform
-const insertBelow = viewport.bottom < newNotification.top
+const insertBelow = viewport.bottom < newNotification.top;
 if (insertBelow) {
-  notifications.prepend(newNotification)
+  notifications.prepend(newNotification);
 } else {
   // Animate in without shifting
-  newNotification.style.transform = 'translateY(-100%)'
-  notifications.prepend(newNotification)
+  newNotification.style.transform = 'translateY(-100%)';
+  notifications.prepend(newNotification);
   requestAnimationFrame(() => {
-    newNotification.style.transform = ''
-  })
+    newNotification.style.transform = '';
+  });
 }
 ```
 
@@ -372,15 +380,15 @@ if (insertBelow) {
 new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
     if (!entry.hadRecentInput) {
-      console.log('Layout shift:', entry.value)
+      console.log('Layout shift:', entry.value);
       entry.sources?.forEach((source) => {
-        console.log('  Shifted element:', source.node)
-        console.log('  Previous rect:', source.previousRect)
-        console.log('  Current rect:', source.currentRect)
-      })
+        console.log('  Shifted element:', source.node);
+        console.log('  Previous rect:', source.previousRect);
+        console.log('  Current rect:', source.currentRect);
+      });
     }
   }
-}).observe({ type: 'layout-shift', buffered: true })
+}).observe({ type: 'layout-shift', buffered: true });
 ```
 
 ---
@@ -400,19 +408,19 @@ new PerformanceObserver((list) => {
 - **web-vitals library** → Send to your analytics
 
 ```javascript
-import { onLCP, onINP, onCLS } from 'web-vitals'
+import { onLCP, onINP, onCLS } from 'web-vitals';
 
 function sendToAnalytics({ name, value, rating }) {
   gtag('event', name, {
     event_category: 'Web Vitals',
     value: Math.round(name === 'CLS' ? value * 1000 : value),
     event_label: rating,
-  })
+  });
 }
 
-onLCP(sendToAnalytics)
-onINP(sendToAnalytics)
-onCLS(sendToAnalytics)
+onLCP(sendToAnalytics);
+onINP(sendToAnalytics);
+onCLS(sendToAnalytics);
 ```
 
 ---
@@ -423,11 +431,11 @@ onCLS(sendToAnalytics)
 
 ```jsx
 // LCP: Use next/image with priority
-import Image from 'next/image'
-;<Image src="/hero.jpg" priority fill alt="Hero" />
+import Image from 'next/image';
+<Image src="/hero.jpg" priority fill alt="Hero" />;
 
 // INP: Use dynamic imports
-const HeavyComponent = dynamic(() => import('./Heavy'), { ssr: false })
+const HeavyComponent = dynamic(() => import('./Heavy'), { ssr: false });
 
 // CLS: Image component handles dimensions automatically
 ```
@@ -436,11 +444,11 @@ const HeavyComponent = dynamic(() => import('./Heavy'), { ssr: false })
 
 ```jsx
 // LCP: Preload in head
-;<link rel="preload" href="/hero.jpg" as="image" fetchpriority="high" />
+<link rel="preload" href="/hero.jpg" as="image" fetchpriority="high" />;
 
 // INP: Memoize and useTransition
-const [isPending, startTransition] = useTransition()
-startTransition(() => setExpensiveState(newValue))
+const [isPending, startTransition] = useTransition();
+startTransition(() => setExpensiveState(newValue));
 
 // CLS: Always specify dimensions in img tags
 ```

@@ -463,19 +463,19 @@ com.company.survey.audit      ← Common pattern
 ```javascript
 // Extract leaf nodes from namespaces
 function extractLeafNode(namespace) {
-  const parts = namespace.split('/')
-  return parts[parts.length - 1]
+  const parts = namespace.split('/');
+  return parts[parts.length - 1];
 }
 
 // Group by common leaf nodes
 function groupByLeafNode(components) {
-  const groups = {}
+  const groups = {};
   components.forEach((comp) => {
-    const leaf = extractLeafNode(comp.namespace)
-    if (!groups[leaf]) groups[leaf] = []
-    groups[leaf].push(comp)
-  })
-  return groups
+    const leaf = extractLeafNode(comp.namespace);
+    if (!groups[leaf]) groups[leaf] = [];
+    groups[leaf].push(comp);
+  });
+  return groups;
 }
 ```
 
@@ -484,17 +484,17 @@ function groupByLeafNode(components) {
 ```javascript
 // Find classes used by multiple components
 function findSharedClasses(components) {
-  const classUsage = {}
+  const classUsage = {};
   components.forEach((comp) => {
     comp.imports.forEach((imp) => {
-      if (!classUsage[imp]) classUsage[imp] = []
-      classUsage[imp].push(comp.name)
-    })
-  })
+      if (!classUsage[imp]) classUsage[imp] = [];
+      classUsage[imp].push(comp.name);
+    });
+  });
 
   return Object.entries(classUsage)
     .filter(([cls, users]) => users.length > 1)
-    .map(([cls, users]) => ({ class: cls, usedBy: users }))
+    .map(([cls, users]) => ({ class: cls, usedBy: users }));
 }
 ```
 
@@ -507,14 +507,14 @@ After identifying common components, create automated checks:
 ```javascript
 // Alert if new components with common patterns are created
 function checkCommonPatterns(components, exclusionList = []) {
-  const leafNodes = {}
+  const leafNodes = {};
   components.forEach((comp) => {
-    const leaf = extractLeafNode(comp.namespace)
+    const leaf = extractLeafNode(comp.namespace);
     if (!exclusionList.includes(leaf)) {
-      if (!leafNodes[leaf]) leafNodes[leaf] = []
-      leafNodes[leaf].push(comp.name)
+      if (!leafNodes[leaf]) leafNodes[leaf] = [];
+      leafNodes[leaf].push(comp.name);
     }
-  })
+  });
 
   return Object.entries(leafNodes)
     .filter(([leaf, comps]) => comps.length > 1)
@@ -522,7 +522,7 @@ function checkCommonPatterns(components, exclusionList = []) {
       pattern: leaf,
       components: comps,
       suggestion: 'Consider consolidating these components',
-    }))
+    }));
 }
 ```
 
@@ -531,15 +531,15 @@ function checkCommonPatterns(components, exclusionList = []) {
 ```javascript
 // Alert if class is used by multiple components
 function checkSharedClasses(components, exclusionList = []) {
-  const classUsage = {}
+  const classUsage = {};
   components.forEach((comp) => {
     comp.imports.forEach((imp) => {
       if (!exclusionList.includes(imp)) {
-        if (!classUsage[imp]) classUsage[imp] = []
-        classUsage[imp].push(comp.name)
+        if (!classUsage[imp]) classUsage[imp] = [];
+        classUsage[imp].push(comp.name);
       }
-    })
-  })
+    });
+  });
 
   return Object.entries(classUsage)
     .filter(([cls, users]) => users.length > 1)
@@ -547,7 +547,7 @@ function checkSharedClasses(components, exclusionList = []) {
       class: cls,
       usedBy: users,
       suggestion: 'Consider extracting to shared component or library',
-    }))
+    }));
 }
 ```
 
