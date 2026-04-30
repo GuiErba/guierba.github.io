@@ -7,6 +7,7 @@ import {
   educationQuery,
 } from '@/sanity/queries';
 import FooterEasterEgg from './components/FooterEasterEgg';
+import ExperienceItem from './components/ExperienceItem';
 
 type Profile = {
   name: string;
@@ -72,14 +73,16 @@ export default async function Home() {
     <div className="max-w-3xl mx-auto px-8 py-12 space-y-8 relative overflow-hidden z-10">
 
       <header>
-        <h1 className="text-2xl font-bold text-foreground mb-2">
+        <h1 className="text-2xl font-bold text-foreground mb-4">
           {p.name} - {p.role}
         </h1>
-        <p className="text-muted-foreground text-sm">
-          {p.location} | {p.email}
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 text-muted-foreground text-sm">
+          <span>{p.location}</span>
+          <span className="hidden md:inline text-border">|</span>
+          <span>{p.email}</span>
           {p.github && (
             <>
-              {' | '}
+              <span className="hidden md:inline text-border">|</span>
               <a href={p.github} target="_blank" rel="noopener noreferrer">
                 github
               </a>
@@ -87,52 +90,66 @@ export default async function Home() {
           )}
           {p.linkedin && (
             <>
-              {' | '}
+              <span className="hidden md:inline text-border">|</span>
               <a href={p.linkedin} target="_blank" rel="noopener noreferrer">
                 linkedin
               </a>
             </>
           )}
-        </p>
-        <hr className="mt-4" />
+        </div>
+        <hr className="mt-6" />
       </header>
 
-      <nav className="text-sm">
-        <span className="text-muted-foreground">[</span>
-        <a href="#about">About</a>
-        <span className="text-muted-foreground">]</span>
+      <nav className="text-sm flex flex-col md:block gap-2 md:gap-0">
+        <span className="block md:inline">
+          <span className="text-muted-foreground md:hidden mr-2">&gt;</span>
+          <span className="text-muted-foreground hidden md:inline">[</span>
+          <a href="#about">About</a>
+          <span className="text-muted-foreground hidden md:inline">]</span>
+        </span>
 
         {skills.length > 0 && (
-          <>
-            <span className="text-muted-foreground"> [</span>
+          <span className="block md:inline">
+            <span className="text-muted-foreground md:hidden mr-2">&gt;</span>
+            <span className="text-muted-foreground hidden md:inline"> [</span>
             <a href="#skills">Skills</a>
-            <span className="text-muted-foreground">]</span>
-          </>
+            <span className="text-muted-foreground hidden md:inline">]</span>
+          </span>
         )}
+
         {experiences.length > 0 && (
-          <>
-            <span className="text-muted-foreground"> [</span>
+          <span className="block md:inline">
+            <span className="text-muted-foreground md:hidden mr-2">&gt;</span>
+            <span className="text-muted-foreground hidden md:inline"> [</span>
             <a href="#experience">Experience</a>
-            <span className="text-muted-foreground">]</span>
-          </>
+            <span className="text-muted-foreground hidden md:inline">]</span>
+          </span>
         )}
+
         {projects.length > 0 && (
-          <>
-            <span className="text-muted-foreground"> [</span>
+          <span className="block md:inline">
+            <span className="text-muted-foreground md:hidden mr-2">&gt;</span>
+            <span className="text-muted-foreground hidden md:inline"> [</span>
             <a href="#projects">Projects</a>
-            <span className="text-muted-foreground">]</span>
-          </>
+            <span className="text-muted-foreground hidden md:inline">]</span>
+          </span>
         )}
+
         {education.length > 0 && (
-          <>
-            <span className="text-muted-foreground"> [</span>
+          <span className="block md:inline">
+            <span className="text-muted-foreground md:hidden mr-2">&gt;</span>
+            <span className="text-muted-foreground hidden md:inline"> [</span>
             <a href="#education">Education</a>
-            <span className="text-muted-foreground">]</span>
-          </>
+            <span className="text-muted-foreground hidden md:inline">]</span>
+          </span>
         )}
-        <span className="text-muted-foreground"> [</span>
-        <a href="#contact">Contact</a>
-        <span className="text-muted-foreground">]</span>
+
+        <span className="block md:inline">
+          <span className="text-muted-foreground md:hidden mr-2">&gt;</span>
+          <span className="text-muted-foreground hidden md:inline"> [</span>
+          <a href="#contact">Contact</a>
+          <span className="text-muted-foreground hidden md:inline">]</span>
+        </span>
       </nav>
 
       <section id="about">
@@ -147,19 +164,23 @@ export default async function Home() {
           <h2 className="text-lg font-bold text-foreground border-b border-border pb-2 mb-3">
             &gt; Skills
           </h2>
-          <table className="text-sm w-full">
-            <tbody>
-              {skills.map((group, index) => (
-                <tr
-                  key={`cat-${group.category}`}
-                  className={index !== skills.length - 1 ? 'border-b border-border' : ''}
-                >
-                  <td className="py-2 text-muted-foreground w-36">{group.category}</td>
-                  <td className="py-2 text-foreground">{group.skills.join(', ')}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="text-sm w-full space-y-4 md:space-y-0">
+            {skills.map((group, index) => (
+              <div
+                key={`cat-${group.category}`}
+                className={`flex flex-col md:flex-row md:py-2 ${
+                  index !== skills.length - 1 ? 'border-b border-border pb-3 md:pb-2' : ''
+                }`}
+              >
+                <div className="text-muted-foreground md:w-36 mb-1 md:mb-0">
+                  {group.category}
+                </div>
+                <div className="text-foreground flex-1">
+                  {group.skills.join(', ')}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       )}
 
@@ -169,20 +190,13 @@ export default async function Home() {
             &gt; Experience
           </h2>
           {experiences.map((exp) => (
-            <div key={`${exp.role}-${exp.company}`} className="mb-5">
-              <div className="text-sm mb-1 leading-relaxed">
-                <span className="text-foreground font-bold">{exp.role}</span>
-                <span className="text-muted-foreground">
-                  {' '}
-                  @ {exp.company} ({exp.period})
-                </span>
-              </div>
-              <ul className="text-sm text-muted-foreground list-disc list-inside ml-3 space-y-1 leading-relaxed">
-                {exp.highlights.map((h, i) => (
-                  <li key={i}>{h}</li>
-                ))}
-              </ul>
-            </div>
+            <ExperienceItem
+              key={`${exp.role}-${exp.company}`}
+              role={exp.role}
+              company={exp.company}
+              period={exp.period}
+              highlights={exp.highlights}
+            />
           ))}
         </section>
       )}
