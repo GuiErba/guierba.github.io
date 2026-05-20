@@ -7,7 +7,7 @@ export const skillsQuery = `*[_type == "skillGroup"] | order(order asc){
 }`;
 
 export const experiencesQuery = `*[_type == "experience"] | order(order asc){
-  role, company, period, highlights
+  role, company, companyUrl, period, highlights
 }`;
 
 export const projectsQuery = `*[_type == "project"] | order(order asc){

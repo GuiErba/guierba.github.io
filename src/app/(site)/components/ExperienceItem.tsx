@@ -5,11 +5,12 @@ import { useState } from 'react';
 type ExperienceItemProps = {
   role: string;
   company: string;
+  companyUrl?: string;
   period: string;
   highlights: string[];
 };
 
-export default function ExperienceItem({ role, company, period, highlights }: ExperienceItemProps) {
+export default function ExperienceItem({ role, company, companyUrl, period, highlights }: ExperienceItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -31,11 +32,23 @@ export default function ExperienceItem({ role, company, period, highlights }: Ex
       </div>
       
       {isExpanded && (
-        <ul className="text-sm text-muted-foreground list-disc list-inside ml-3 space-y-1 leading-relaxed mt-2">
-          {highlights.map((h, i) => (
-            <li key={i}>{h}</li>
-          ))}
-        </ul>
+        <div className="mt-2">
+          {companyUrl && (
+            <a
+              href={companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mb-2 ml-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              → Visit {company}
+            </a>
+          )}
+          <ul className="text-sm text-muted-foreground list-disc list-inside ml-3 space-y-1 leading-relaxed">
+            {highlights.map((h, i) => (
+              <li key={i}>{h}</li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

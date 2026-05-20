@@ -29,6 +29,7 @@ type SkillGroup = {
 type Experience = {
   role: string;
   company: string;
+  companyUrl?: string;
   period: string;
   highlights: string[];
 };
@@ -194,6 +195,7 @@ export default async function Home() {
               key={`${exp.role}-${exp.company}`}
               role={exp.role}
               company={exp.company}
+              companyUrl={exp.companyUrl}
               period={exp.period}
               highlights={exp.highlights}
             />

@@ -19,6 +19,12 @@ export const experienceType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'companyUrl',
+      title: 'Company URL',
+      type: 'url',
+      description: 'Link to the company website (optional)',
+    }),
+    defineField({
       name: 'period',
       title: 'Period',
       type: 'string',
